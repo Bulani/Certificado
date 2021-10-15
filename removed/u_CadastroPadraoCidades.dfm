@@ -1,0 +1,194 @@
+inherited frm_CadastroPadraoCidades: Tfrm_CadastroPadraoCidades
+  Caption = 'Cadastro Padrao Cidades'
+  ClientHeight = 486
+  OnClose = FormClose
+  ExplicitWidth = 724
+  ExplicitHeight = 525
+  PixelsPerInch = 96
+  TextHeight = 19
+  inherited Bevel1: TBevel
+    Top = 435
+    ExplicitTop = 435
+  end
+  inherited PageControl1: TPageControl
+    Height = 435
+    ExplicitHeight = 435
+    inherited tabConsulta: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 30
+      ExplicitWidth = 700
+      ExplicitHeight = 401
+      inherited grid_Dados: TDBGrid
+        Height = 330
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'cod_cidade'
+            Title.Caption = 'Codigo'
+            Width = 71
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'localidade'
+            Title.Caption = 'Nome'
+            Width = 384
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'uf'
+            Title.Caption = 'UF'
+            Width = 63
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'cep'
+            Title.Caption = 'CEP'
+            Width = 140
+            Visible = True
+          end>
+      end
+    end
+    inherited tabCadastro: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 30
+      ExplicitWidth = 700
+      ExplicitHeight = 401
+      object lblNome: TLabel
+        Left = 16
+        Top = 16
+        Width = 42
+        Height = 19
+        Caption = 'Nome'
+        FocusControl = edit_nome
+      end
+      object lblUF: TLabel
+        Left = 16
+        Top = 72
+        Width = 19
+        Height = 19
+        Caption = 'UF'
+        FocusControl = edit_uf
+      end
+      object lblCEP: TLabel
+        Left = 16
+        Top = 128
+        Width = 82
+        Height = 19
+        Caption = 'CEP Padr'#227'o'
+        FocusControl = edit_cep
+      end
+      object edit_nome: TDBEdit
+        Left = 16
+        Top = 39
+        Width = 265
+        Height = 27
+        DataField = 'localidade'
+        DataSource = ds_dados
+        TabOrder = 0
+      end
+      object edit_uf: TDBEdit
+        Left = 16
+        Top = 96
+        Width = 65
+        Height = 27
+        DataField = 'uf'
+        DataSource = ds_dados
+        TabOrder = 1
+      end
+      object edit_cep: TDBEdit
+        Left = 16
+        Top = 153
+        Width = 156
+        Height = 27
+        DataField = 'cep'
+        DataSource = ds_dados
+        TabOrder = 2
+      end
+    end
+  end
+  inherited B_gravar: TButton
+    Top = 441
+    ExplicitTop = 441
+  end
+  inherited B_cancelar: TButton
+    Top = 441
+    ExplicitTop = 441
+  end
+  inherited B_incluir: TButton
+    Top = 441
+    ExplicitTop = 441
+  end
+  inherited B_alterar: TButton
+    Top = 441
+    ExplicitTop = 441
+  end
+  inherited B_excluir: TButton
+    Top = 441
+    ExplicitTop = 441
+  end
+  inherited B_fechar: TButton
+    Top = 441
+    ExplicitTop = 441
+  end
+  inherited ds_dados: TDataSource
+    Left = 648
+    Top = 336
+  end
+  inherited q_dados: TFDQuery
+    Connection = DM.FDConnection1
+    SQL.Strings = (
+      'select * from cidades'
+      'order by cod_cidade')
+    Left = 584
+    Top = 312
+    object q_dadoscod_cidade: TFDAutoIncField
+      FieldName = 'cod_cidade'
+      Origin = 'cod_cidade'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object q_dadosuf: TStringField
+      FieldName = 'uf'
+      Origin = 'uf'
+      Required = True
+      FixedChar = True
+      Size = 2
+    end
+    object q_dadoscep: TStringField
+      FieldName = 'cep'
+      Origin = 'cep'
+      FixedChar = True
+      Size = 9
+    end
+    object q_dadoslogradouro: TStringField
+      FieldName = 'logradouro'
+      Origin = 'logradouro'
+      Size = 100
+    end
+    object q_dadoscomplemento: TStringField
+      FieldName = 'complemento'
+      Origin = 'complemento'
+      Size = 100
+    end
+    object q_dadosbairro: TStringField
+      FieldName = 'bairro'
+      Origin = 'bairro'
+      Size = 100
+    end
+    object q_dadosibge: TStringField
+      FieldName = 'ibge'
+      Origin = 'ibge'
+      FixedChar = True
+      Size = 10
+    end
+    object q_dadoslocalidade: TStringField
+      FieldName = 'localidade'
+      Origin = 'localidade'
+      Required = True
+      Size = 100
+    end
+  end
+end

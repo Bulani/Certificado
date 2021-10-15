@@ -1,0 +1,45 @@
+object DM: TDM
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = bsNone
+  Caption = 'DM'
+  ClientHeight = 320
+  ClientWidth = 434
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object FDConnection1: TFDConnection
+    ConnectionName = 'MINHA_CONEXAO'
+    Params.Strings = (
+      'Server=JOAOSUPORTE'
+      'Database=certificados'
+      'User_Name=sa'
+      'Password=56261377'
+      'MARS=No'
+      'DriverID=MSSQL')
+    LoginPrompt = False
+    Left = 56
+    Top = 32
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 64
+    Top = 112
+  end
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
+    Left = 64
+    Top = 192
+  end
+  object Q_Geral: TFDQuery
+    Connection = FDConnection1
+    Left = 168
+    Top = 24
+  end
+end

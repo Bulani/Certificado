@@ -1,0 +1,24 @@
+unit u_dm;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  Tfrm_dm = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_dm: Tfrm_dm;
+
+implementation
+
+{$R *.dfm}
+
+end.

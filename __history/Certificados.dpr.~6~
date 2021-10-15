@@ -1,0 +1,22 @@
+program Certificados;
+
+uses
+  Vcl.Forms,
+  u_principal in 'u_principal.pas' {frm_principal},
+  u_pesquisa in 'u_pesquisa.pas' {frm_pesquisa},
+  u_CadastroPadrao in 'u_CadastroPadrao.pas' {frm_CadastroPadrao},
+  u_CadastroPadraoCidades in 'u_CadastroPadraoCidades.pas' {frm_CadastroPadraoCidades},
+  u_dm in 'u_dm.pas' {DM: TDataModule},
+  u_CadastroPadraoClientes in 'u_CadastroPadraoClientes.pas' {frm_CadastroPadraoClientes},
+  u_CadastroPadraoCidadesJSON in 'u_CadastroPadraoCidadesJSON.pas' {frm_CadastroPadraoCidadesJSON},
+  u_CadastroPadraoPessoas in 'u_CadastroPadraoPessoas.pas' {frm_CadastroPadraoPessoas};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tfrm_principal, frm_principal);
+  Application.CreateForm(TDM, DM);
+  Application.Run;
+end.

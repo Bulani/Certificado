@@ -1,0 +1,162 @@
+unit u_CadastroPadraoClientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, u_CadastroPadrao, Data.DB,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.DBCtrls,
+  Vcl.Mask, Vcl.Buttons;
+
+type
+  Tfrm_CadastroPadraoClientes = class(Tfrm_CadastroPadrao)
+    q_dadoscod_cliente: TFDAutoIncField;
+    q_dadosnome: TStringField;
+    q_dadoscpf: TStringField;
+    q_dadosrg: TStringField;
+    q_dadossexo: TStringField;
+    q_dadosendereco: TStringField;
+    q_dadosbairro: TStringField;
+    q_dadoscod_cidade: TIntegerField;
+    q_dadoscep: TStringField;
+    q_dadostelefone: TStringField;
+    q_dadoscelular: TStringField;
+    q_dadosemail: TStringField;
+    Label2: TLabel;
+    edit_nome: TDBEdit;
+    Label3: TLabel;
+    edit_cpf: TDBEdit;
+    Label4: TLabel;
+    edit_rg: TDBEdit;
+    Label6: TLabel;
+    edit_endereco: TDBEdit;
+    Label7: TLabel;
+    edit_bairro: TDBEdit;
+    Label8: TLabel;
+    edit_cod_cidade: TDBEdit;
+    b_pequisa_cidade: TBitBtn;
+    edit_nome_cidade: TEdit;
+    edit_cep: TDBEdit;
+    Label9: TLabel;
+    Label11: TLabel;
+    edit_telefone: TDBEdit;
+    Label12: TLabel;
+    edit_celular: TDBEdit;
+    Label13: TLabel;
+    edit_email: TDBEdit;
+    q_dadosdata_nascimento: TDateField;
+    Label14: TLabel;
+    edit_nascimento: TDBEdit;
+    rg_sexo: TDBRadioGroup;
+    q_dadosnumero: TIntegerField;
+    Label5: TLabel;
+    edit_numero: TDBEdit;
+    procedure B_fecharClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure B_incluirClick(Sender: TObject);
+    procedure b_pequisa_cidadeClick(Sender: TObject);
+    procedure edit_cod_cidadeChange(Sender: TObject);
+  protected
+    { Public declarations }
+    procedure controle_visual; override;
+    function pode_excluir : string; override;
+    function validar : boolean; override;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_CadastroPadraoClientes: Tfrm_CadastroPadraoClientes;
+
+implementation
+
+{$R *.dfm}
+
+uses u_pesquisa, funcoes, u_dm;
+
+procedure Tfrm_CadastroPadraoClientes.B_fecharClick(Sender: TObject);
+begin
+  inherited;
+close;
+end;
+
+procedure Tfrm_CadastroPadraoClientes.B_incluirClick(Sender: TObject);
+begin
+  inherited;
+  edit_nome.SetFocus;
+end;
+
+procedure Tfrm_CadastroPadraoClientes.b_pequisa_cidadeClick(Sender: TObject);
+begin
+  inherited;
+     frm_pesquisa:= Tfrm_pesquisa.create(application);
+
+     frm_pesquisa.tabela:= 'cidades';
+     frm_pesquisa.codigo:= 'cod_cidade';
+     frm_pesquisa.campo1:= 'nome';
+     frm_pesquisa.campo2:= 'cep_padrao';
+
+     frm_pesquisa.rotulo_codigo:= 'Código';
+     frm_pesquisa.rotulo_c1:= 'Nome';
+     frm_pesquisa.rotulo_c2:= 'CEP Padrao';
+
+     frm_pesquisa.largura_codigo:= 0.10; // 10% da largura do dbgrid
+     frm_pesquisa.largura_c1:= 0.45;
+     frm_pesquisa.largura_c2:= 0.25;
+
+
+     frm_pesquisa.ShowModal;
+
+     if frm_pesquisa.ModalResult = mrOk then
+     begin
+          edit_cod_cidade.Text:= frm_pesquisa.q_dados.fieldbyname(frm_pesquisa.codigo).AsString;
+     end;
+
+     // retira o objeto da memória
+     frm_pesquisa.Free;
+end;
+
+procedure Tfrm_CadastroPadraoClientes.controle_visual;
+begin
+  inherited;
+
+end;
+
+procedure Tfrm_CadastroPadraoClientes.edit_cod_cidadeChange(Sender: TObject);
+begin
+  inherited;
+  edit_nome_cidade.Text:= '';
+
+     dm.q_geral.SQL.Clear;
+     dm.q_geral.SQL.add(' select * from cidades where cod_cidade = ' + QuotedStr(edit_cod_cidade.Text));
+     dm.q_geral.open;
+
+     if not dm.q_geral.IsEmpty
+      then edit_nome_cidade.Text:= dm.q_geral.FieldByName('nome').AsString;
+      edit_cep.Text:= dm.q_geral.FieldByName('cep_padrao').AsString;
+end;
+
+procedure Tfrm_CadastroPadraoClientes.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+      Action:= caFree;
+      Frm_CadastroPadraoClientes:= nil;
+end;
+
+function Tfrm_CadastroPadraoClientes.pode_excluir: string;
+begin
+
+end;
+
+function Tfrm_CadastroPadraoClientes.validar: boolean;
+begin
+
+end;
+
+end.

@@ -1,0 +1,78 @@
+unit u_FiltroTiposCertificados;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  Tf_FiltroTiposCertificados = class(TForm)
+    btnImprimir: TBitBtn;
+    btnCancelar: TBitBtn;
+    Label1: TLabel;
+    cbOpcoes: TComboBox;
+    procedure btnCancelarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnImprimirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  f_FiltroTiposCertificados: Tf_FiltroTiposCertificados;
+
+implementation
+
+{$R *.dfm}
+
+uses u_dm, u_rel_tiposCertificados;
+
+procedure Tf_FiltroTiposCertificados.btnCancelarClick(Sender: TObject);
+begin
+close;
+end;
+
+procedure Tf_FiltroTiposCertificados.btnImprimirClick(Sender: TObject);
+begin
+
+  if cbOpcoes.ItemIndex = 0 then
+  begin
+    f_rel_tiposCertificados.q_tipos.SQL.Clear;
+    f_rel_tiposCertificados.q_tipos.SQL.Add('select * from tipos order by cod_tipo')
+  end
+
+  else if cbOpcoes.ItemIndex = 1 then
+  begin
+    f_rel_tiposCertificados.q_tipos.SQL.Clear;
+    f_rel_tiposCertificados.q_tipos.SQL.Add('select * from tipos order by tipo')
+  end
+
+  else if cbOpcoes.ItemIndex = 2 then
+  begin
+    f_rel_tiposCertificados.q_tipos.SQL.Clear;
+    f_rel_tiposCertificados.q_tipos.SQL.Add('select * from tipos order by validade')
+  end
+
+  else if cbOpcoes.ItemIndex = 3 then
+  begin
+    f_rel_tiposCertificados.q_tipos.SQL.Clear;
+    f_rel_tiposCertificados.q_tipos.SQL.Add('select * from tipos order by valor')
+  end;
+
+  //ativa a query e gera a pre-visualização do relatorio
+  f_rel_tiposCertificados.q_tipos.Open();
+  f_rel_tiposCertificados.RLReport1.Preview();
+
+end;
+
+procedure Tf_FiltroTiposCertificados.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+      Action:= caFree;
+      f_FiltroTiposCertificados:= nil;
+end;
+
+end.

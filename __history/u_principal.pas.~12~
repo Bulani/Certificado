@@ -1,0 +1,66 @@
+unit u_principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+
+type
+  Tfrm_principal = class(TForm)
+    MainMenuTopo: TMainMenu;
+    menuCadastros: TMenuItem;
+    Cidades1: TMenuItem;
+    Clientes1: TMenuItem;
+    procedure Cidades1Click(Sender: TObject);
+    procedure Clientes1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_principal: Tfrm_principal;
+
+implementation
+
+{$R *.dfm}
+
+uses u_CadastroPadraoCidades, u_CadastroPadraoClientes;
+
+procedure Tfrm_principal.Cidades1Click(Sender: TObject);
+begin
+     // se o formulário não estiver instanciado
+     if not Assigned(Frm_CadastroPadraoCidades) then
+     begin
+          // instanciando o formulário
+          Frm_CadastroPadraoCidades:= TFrm_CadastroPadraoCidades.create(application);
+          Frm_CadastroPadraoCidades.tabela:= 'cidades';
+          Frm_CadastroPadraoCidades.campo_chave:= 'cod_cidade';
+          Frm_CadastroPadraoCidades.campo_pesquisa:= 'nome';
+          Frm_CadastroPadraoCidades.carregar_dados('');
+     end
+     else begin
+          Frm_CadastroPadraoCidades.Show;
+     end;
+end;
+
+procedure Tfrm_principal.Clientes1Click(Sender: TObject);
+begin
+     // se o formulário não estiver instanciado
+     if not Assigned(Frm_CadastroPadraoClientes) then
+     begin
+          // instanciando o formulário
+          Frm_CadastroPadraoClientes:= TFrm_CadastroPadraoClientes.create(application);
+          Frm_CadastroPadraoClientes.tabela:= 'clientes';
+          Frm_CadastroPadraoClientes.campo_chave:= 'cod_cliente';
+          Frm_CadastroPadraoClientes.campo_pesquisa:= 'nome';
+          Frm_CadastroPadraoClientes.carregar_dados('');
+     end
+     else begin
+          Frm_CadastroPadraoClientes.Show;
+     end;
+end;
+
+end.

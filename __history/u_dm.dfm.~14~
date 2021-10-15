@@ -1,0 +1,32 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 333
+  Width = 369
+  object FDConnection1: TFDConnection
+    ConnectionName = 'MINHA_CONEXAO'
+    Params.Strings = (
+      
+        'Database=C:\Users\joao\Documents\banco certificado\CERTIFICADO.F' +
+        'DB'
+      'User_Name=sysdba'
+      'Password=masterkey'
+      'DriverID=FB')
+    LoginPrompt = False
+    Left = 104
+    Top = 32
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 104
+    Top = 120
+  end
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
+    Left = 232
+    Top = 120
+  end
+  object Q_Geral: TFDQuery
+    Connection = FDConnection1
+    Left = 232
+    Top = 32
+  end
+end

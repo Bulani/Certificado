@@ -1,0 +1,134 @@
+unit u_principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls, Vcl.ComCtrls,
+  Vcl.StdCtrls, Vcl.ToolWin, Vcl.WinXCalendars;
+
+type
+  Tfrm_principal = class(TForm)
+    MainMenuTopo: TMainMenu;
+    menuCadastros: TMenuItem;
+    JSON1: TMenuItem;
+    Pessoas1: TMenuItem;
+    iposdeCertificados1: TMenuItem;
+    Certificados1: TMenuItem;
+    menuRelatorios: TMenuItem;
+    Funes1: TMenuItem;
+    Backup1: TMenuItem;
+    StatusBar1: TStatusBar;
+    iposdeCertificado1: TMenuItem;
+    procedure JSON1Click(Sender: TObject);
+    procedure Pessoas1Click(Sender: TObject);
+    procedure iposdeCertificados1Click(Sender: TObject);
+    procedure Certificados1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure iposdeCertificado1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_principal: Tfrm_principal;
+
+implementation
+
+{$R *.dfm}
+
+uses u_CadastroPadraoCidadesJSON, u_CadastroPadraoPessoas,
+      u_CadastroPadraoTiposCertificados, u_CadastroPadraoCertificados,
+  u_rel_tiposCertificados;
+
+{==========================================================}
+{      DO QUE VALE O DINHEIRO? DO QUE VALE O FAMA?         }
+{    SE A MULHER QUE EU QUERO TA DISTANTE DA MINHA CAMA.   }
+{==========================================================}
+
+procedure Tfrm_principal.Certificados1Click(Sender: TObject);
+begin
+     // se o formulário não estiver instanciado
+     if not Assigned(Frm_CadastroPadraoCertificados) then
+     begin
+          // instanciando o formulário
+          Frm_CadastroPadraoCertificados:= TFrm_CadastroPadraoCertificados.create(application);
+          Frm_CadastroPadraoCertificados.tabela:= 'certificados';
+          Frm_CadastroPadraoCertificados.campo_chave:= 'cod_certificado';
+          Frm_CadastroPadraoCertificados.campo_pesquisa:= 'cod_certificado';
+          Frm_CadastroPadraoCertificados.carregar_dados('');
+     end
+     else begin
+          Frm_CadastroPadraoCertificados.Show;
+     end;
+
+end;
+
+procedure Tfrm_principal.FormCreate(Sender: TObject);
+begin
+     //StatusBar1.Panels[0].Text:= DateTimeToStr(now);
+     //StatusBar1.Panels[1].Text:= 'Usuário: André Mendes';
+end;
+
+procedure Tfrm_principal.iposdeCertificado1Click(Sender: TObject);
+begin
+      //ativa a query e gera a pre-visualização do relatorio
+      f_rel_tiposCertificados.q_tipos.Open();
+      f_rel_tiposCertificados.RLReport1.Preview();
+
+end;
+
+procedure Tfrm_principal.iposdeCertificados1Click(Sender: TObject);
+begin
+     // se o formulário não estiver instanciado
+     if not Assigned(Frm_CadastroPadraoTiposCertificados) then
+     begin
+          // instanciando o formulário
+          Frm_CadastroPadraoTiposCertificados:= TFrm_CadastroPadraoTiposCertificados.create(application);
+          Frm_CadastroPadraoTiposCertificados.tabela:= 'tipos';
+          Frm_CadastroPadraoTiposCertificados.campo_chave:= 'cod_tipo';
+          Frm_CadastroPadraoTiposCertificados.campo_pesquisa:= 'cod_tipo';
+          Frm_CadastroPadraoTiposCertificados.carregar_dados('');
+     end
+     else begin
+          Frm_CadastroPadraoTiposCertificados.Show;
+     end;
+end;
+
+procedure Tfrm_principal.JSON1Click(Sender: TObject);
+begin
+     // se o formulário não estiver instanciado
+     if not Assigned(Frm_CadastroPadraoCidadesJSON) then
+     begin
+          // instanciando o formulário
+          Frm_CadastroPadraoCidadesJSON:= TFrm_CadastroPadraoCidadesJSON.create(application);
+          Frm_CadastroPadraoCidadesJSON.tabela:= 'cidades';
+          Frm_CadastroPadraoCidadesJSON.campo_chave:= 'cod_cidade';
+          Frm_CadastroPadraoCidadesJSON.campo_pesquisa:= 'localidade';
+          Frm_CadastroPadraoCidadesJSON.carregar_dados('');
+     end
+     else begin
+          Frm_CadastroPadraoCidadesJSON.Show;
+     end;
+end;
+
+procedure Tfrm_principal.Pessoas1Click(Sender: TObject);
+begin
+     // se o formulário não estiver instanciado
+     if not Assigned(Frm_CadastroPadraoPessoas) then
+     begin
+          // instanciando o formulário
+          Frm_CadastroPadraoPessoas:= TFrm_CadastroPadraoPessoas.create(application);
+          Frm_CadastroPadraoPessoas.tabela:= 'pessoas';
+          Frm_CadastroPadraoPessoas.campo_chave:= 'cod_pessoa';
+          Frm_CadastroPadraoPessoas.campo_pesquisa:= 'razao_nome';
+          Frm_CadastroPadraoPessoas.carregar_dados('');
+     end
+     else begin
+          Frm_CadastroPadraoPessoas.Show;
+     end;
+end;
+
+end.

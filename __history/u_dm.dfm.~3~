@@ -1,0 +1,42 @@
+object DM: TDM
+  Left = 0
+  Top = 0
+  Caption = 'DM'
+  ClientHeight = 281
+  ClientWidth = 418
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object FDConnection1: TFDConnection
+    ConnectionName = 'MINHA_CONEXAO'
+    Params.Strings = (
+      'Server=JOAOSUPORTE'
+      'Database=restaurante_LPV_2019'
+      'User_Name=sa'
+      'Password=56261377'
+      'DriverID=MSSQL')
+    LoginPrompt = False
+    Left = 64
+    Top = 32
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 64
+    Top = 112
+  end
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
+    Left = 64
+    Top = 192
+  end
+  object Q_Geral: TFDQuery
+    Connection = FDConnection1
+    Left = 168
+    Top = 24
+  end
+end

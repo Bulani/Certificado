@@ -1,0 +1,37 @@
+object frm_principal: Tfrm_principal
+  Left = 0
+  Top = 0
+  AutoSize = True
+  BorderStyle = bsSingle
+  Caption = 'SGCD - Sistema de Gerenciamento de Certificados Digitais'
+  ClientHeight = 447
+  ClientWidth = 734
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenuTopo
+  OldCreateOrder = False
+  Position = poScreenCenter
+  WindowState = wsMaximized
+  PixelsPerInch = 96
+  TextHeight = 13
+  object MainMenuTopo: TMainMenu
+    Left = 112
+    Top = 96
+    object menuCadastros: TMenuItem
+      Caption = 'Cadastros'
+      object Cidades1: TMenuItem
+        Caption = 'Cidades'
+        OnClick = Cidades1Click
+      end
+      object Clientes1: TMenuItem
+        Caption = 'Clientes'
+        OnClick = Clientes1Click
+      end
+    end
+  end
+end

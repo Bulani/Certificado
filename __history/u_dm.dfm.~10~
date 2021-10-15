@@ -1,0 +1,31 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 333
+  Width = 369
+  object FDConnection1: TFDConnection
+    ConnectionName = 'MINHA_CONEXAO'
+    Params.Strings = (
+      'Server=JOAOSUPORTE'
+      'Database=certificados'
+      'User_Name=sa'
+      'Password=56261377'
+      'DriverID=MSSQL')
+    LoginPrompt = False
+    Left = 64
+    Top = 32
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 64
+    Top = 120
+  end
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
+    Left = 64
+    Top = 200
+  end
+  object Q_Geral: TFDQuery
+    Connection = FDConnection1
+    Left = 192
+    Top = 32
+  end
+end
